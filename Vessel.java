@@ -9,7 +9,8 @@ public class Vessel {
 		int position = 0;
 		//0 = horizontal, 1 = vertical
 		int orientation = 0;
-		int[] battleship = {position,orientation,size};
+		int health = size;
+		int[] battleship = {position,orientation,health,size};
 		return battleship;
 	}
 	
