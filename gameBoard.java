@@ -1,9 +1,12 @@
 package Battleship;
 
 public class gameBoard {
+	
+	String[][] gameBoard = new String[8][8];
+	
 	public String[][] makeBoard()
 	{
-		String[][] gameBoard = new String[8][8];
+		
 
 		
 		for (int i=0; i<gameBoard.length; i++)
