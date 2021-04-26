@@ -1,9 +1,13 @@
 package Battleship;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Populate {
 	Vessel vessel = new Vessel();
 	gameBoard board = new gameBoard();
-
+	Scanner in = new Scanner(System.in);
+	
 	public String[][] placingVessels(String[][] gameBoard,int[] battleship,String coords,int orientation)
 	{
 		String y = Character.toString(coords.charAt(0));
@@ -97,5 +101,57 @@ public class Populate {
 		}
 
 		return gameBoard;
+	}
+
+	public String[][] placeFleet(ArrayList<int[]> fleetbag, String[][] gameBoard)
+	{
+		for(int i = 0; i < fleetbag.size(); i++)
+		{
+			board.displayBoard(gameBoard);
+			int[] battleship = fleetbag.get(i);
+			System.out.println("Enter xy coordinates.");
+			String coords = in.next();
+			System.out.println("Enter orientation. 0 = horizontal, 1 = vertical");
+			String orientation = in.next();
+			int orientationint = Integer.parseInt(orientation); 
+			placingVessels(gameBoard,battleship,coords,orientationint);
+			if(i==fleetbag.size()-1)
+			{
+				board.displayBoard(gameBoard);
+				System.out.println("Hit n & enter to finish.");
+				in.next();
+			}
+		}
+		return gameBoard;
+		
+	}
+	
+	
+	public int fleetStatus(ArrayList<int[]> fleetbag)
+	{
+		//determines if fleet is alive or not
+		int dead = 0;
+		//goes through bag finding ship status
+		for(int i = 0; i < fleetbag.size(); i++)
+		{
+			int[] status = fleetbag.get(i);
+			//if 0, ship is dead, counter of dead ships rises
+			if(status[2]==0)
+			{
+				dead = dead + 1;
+			}
+		}
+		
+		if(dead==fleetbag.size())
+		{
+			return 1;
+		}
+		
+		else
+		{
+			return 0;
+		}
+		
+		
 	}
 }

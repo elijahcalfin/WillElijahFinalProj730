@@ -1,45 +1,52 @@
 package Battleship;
 
+import java.util.ArrayList;
+
 public class gameManager {
 
 	public static void main(String[] args) {
-		gameBoard board = new gameBoard();
-		gameBoard board2 = new gameBoard();
 		Barrage barrage = new Barrage();
 		Vessel vessel = new Vessel();
 		Populate populator = new Populate();
-		int[] cruiser = vessel.createVesselCaller(5);
-		String[][] boardp1 = board.makeBoard();
-		String[][] boardp2 = board2.makeBoard();
-		
-		boardp1 = populator.placingVessels(boardp1, cruiser, "54", 0);
-		board.displayBoard(boardp1);
-		System.out.println("");
-		boardp1 = populator.placingVessels(boardp1, cruiser, "25", 0);
-		board.displayBoard(boardp1);
-		
-		System.out.println("");
-		System.out.println("");
-		System.out.println("");
-		
-		boardp2 = populator.placingVessels(boardp2, cruiser, "26", 1);
-		
-		board2.displayBoard(boardp2);
-		System.out.println("");
-		boardp2 = populator.placingVessels(boardp2, cruiser, "62", 1);
-		board2.displayBoard(boardp2);
 
-		System.out.println("");
-		System.out.println("");
-		System.out.println("");
-		
-		boardp2 = populator.placingVessels(boardp2, cruiser, "27", 0);
-		board2.displayBoard(boardp2);
-		System.out.println(cruiser[0]);
-		barrage.isShipThere(cruiser,"27");
-		barrage.isShipThere(cruiser,"37");
-		barrage.isShipThere(cruiser,"47");
-		barrage.isShipThere(cruiser,"57");
-		barrage.isShipThere(cruiser,"67");
+		gameBoard player1 = new gameBoard();
+		String[][] p1b = player1.makeBoard();
+		gameBoard player2 = new gameBoard();
+		String[][] p2b = player2.makeBoard();
+		ArrayList<int[]> p1f = vessel.createFleet();
+		ArrayList<int[]> p2f = vessel.createFleet();
+		System.out.println("Player 1");
+		populator.placeFleet(p1f, p1b);
+		System.out.println("Player 2");
+		populator.placeFleet(p2f, p2b);
+		int deadcount = 0;
+		int whichplayer = 1;
+		while(deadcount<1)
+		{
+			if(whichplayer==1);
+			{
+				System.out.println("");
+				player2.displayBoard(p2b);
+				barrage.sweepBoard(p2b, p2f);
+				whichplayer=2;
+				deadcount=populator.fleetStatus(p2f);
+			}
+			if(whichplayer==2);
+			{
+				System.out.println("");
+				player1.displayBoard(p1b);
+				barrage.sweepBoard(p1b, p1f);
+				whichplayer=1;
+				deadcount=populator.fleetStatus(p1f);
+			}
+		}
+		if(whichplayer==2)
+		{
+			System.out.println("Player 2 is dead!");
+		}
+		if(whichplayer==1)
+		{
+			System.out.println("Player 1 is dead!");
+		}
 	}
 }
