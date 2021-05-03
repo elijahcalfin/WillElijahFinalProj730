@@ -8,7 +8,7 @@ public class Populate {
 	gameBoard board = new gameBoard();
 	Scanner in = new Scanner(System.in);
 	
-	public String[][] placingVessels(String[][] gameBoard,int[] battleship,String coords,int orientation)
+	public Boolean placingVessels(String[][] gameBoard,int[] battleship,String coords,int orientation)
 	{
 		String y = Character.toString(coords.charAt(0));
 		String x = Character.toString(coords.charAt(1));
@@ -34,6 +34,7 @@ public class Populate {
 							if(gameBoard[i][k] == "=")
 							{
 								System.out.println("Another ship is in the way. Try again.");
+								return false;
 							}
 						}
 					}
@@ -43,7 +44,7 @@ public class Populate {
 			if(yi+shipsize>gameBoard.length||xi>gameBoard.length)
 			{
 				System.out.println("Ship placed out of horizontal bounds. Try again.");
-				return gameBoard;
+				return false;
 			}
 			for (int i=0; i<gameBoard.length; i++)
 			{
@@ -74,6 +75,7 @@ public class Populate {
 							if(gameBoard[k][i] == "=")
 							{
 								System.out.println("Another ship is in the way. Try again.");
+								return false;
 							}
 						}
 					}
@@ -82,7 +84,7 @@ public class Populate {
 			if(xi+shipsize>gameBoard.length||yi>gameBoard.length)
 			{
 				System.out.println("Ship placed out of vertical bounds. Try again.");
-				return gameBoard;
+				return false;
 			}
 			for (int i=0; i<gameBoard.length; i++)
 			{
@@ -100,7 +102,7 @@ public class Populate {
 			}
 		}
 
-		return gameBoard;
+		return true;
 	}
 
 	public String[][] placeFleet(ArrayList<int[]> fleetbag, String[][] gameBoard)
@@ -111,10 +113,24 @@ public class Populate {
 			int[] battleship = fleetbag.get(i);
 			System.out.println("Enter xy coordinates.");
 			String coords = in.next();
+			while(coords.length()!=2)
+			{
+				System.out.println("Must be two numbers. Enter xy coordinates.");
+				coords = in.next();
+			}
 			System.out.println("Enter orientation. 0 = horizontal, 1 = vertical");
 			String orientation = in.next();
+			while(orientation.length()!=1)
+			{
+				System.out.println("Must be 1 number. Re-enter orientation.");
+				orientation = in.next();
+			}
 			int orientationint = Integer.parseInt(orientation); 
-			placingVessels(gameBoard,battleship,coords,orientationint);
+			boolean tf = placingVessels(gameBoard,battleship,coords,orientationint);
+			if(tf==false)//if placement does not work correctly, walks back the index by one so the user can try again.
+			{
+				i = i -1;
+			}
 			if(i==fleetbag.size()-1)
 			{
 				board.displayBoard(gameBoard);

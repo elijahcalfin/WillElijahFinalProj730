@@ -6,9 +6,7 @@ public class gameBoard {
 	
 	public String[][] makeBoard()
 	{
-		
 
-		
 		for (int i=0; i<gameBoard.length; i++)
 		{
 			for (int k=0; k<gameBoard[0].length; k++)
@@ -36,7 +34,8 @@ public class gameBoard {
 			}
 		}
 	}
-	public void displayenemyBoard(String[][] gameBoard)
+	
+	public void displayEnemyBoard(String[][] gameBoard)
 	{
 		
 		for (int i=0; i<gameBoard.length; i++)
@@ -45,25 +44,24 @@ public class gameBoard {
 			{
 				if(k == gameBoard[0].length-1)
 				{
-					if(gameBoard[i][k]=="=")//detects if space houses enemy vessel
+					if(gameBoard[i][k]=="=")
 					{
-						System.out.println("["+" "+"]");//prints empty bracket so you cannot see enemy's ships
+						System.out.println("[ ]");
 					}
 					else
 					{
-						System.out.println("["+" "+"]");
+						System.out.println("["+gameBoard[i][k]+"]");
 					}
-					
 				}
 				else
 				{
-					if(gameBoard[i][k]=="=")//detects if space houses enemy vessel
+					if(gameBoard[i][k]=="=")
 					{
-						System.out.print("["+" "+"]");//prints empty bracket so you cannot see enemy's ships
+						System.out.print("[ ]");
 					}
 					else
 					{
-						System.out.println("["+" "+"]");
+						System.out.print("["+gameBoard[i][k]+"]");
 					}
 				}
 			}

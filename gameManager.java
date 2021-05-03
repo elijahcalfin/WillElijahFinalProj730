@@ -17,6 +17,10 @@ public class gameManager {
 		ArrayList<int[]> p2f = vessel.createFleet();
 		System.out.println("Player 1");
 		populator.placeFleet(p1f, p1b);
+		for(int i = 0; i<20; i++)//stupid way of clearing console by flooding it
+		{
+			System.out.println(" ");
+		}
 		System.out.println("Player 2");
 		populator.placeFleet(p2f, p2b);
 		int deadcount = 0;
@@ -25,16 +29,24 @@ public class gameManager {
 		{
 			if(whichplayer==1);
 			{
+				for(int i = 0; i<20; i++)//stupid way of clearing console
+				{
+					System.out.println(" ");
+				}
 				System.out.println("");
-				player2.displayBoard(p2b);
+				player2.displayEnemyBoard(p2b);
 				barrage.sweepBoard(p2b, p2f);
 				whichplayer=2;
 				deadcount=populator.fleetStatus(p2f);
 			}
 			if(whichplayer==2);
 			{
+				for(int i = 0; i<20; i++)//stupid way of clearing console
+				{
+					System.out.println(" ");
+				}
 				System.out.println("");
-				player1.displayBoard(p1b);
+				player1.displayEnemyBoard(p1b);
 				barrage.sweepBoard(p1b, p1f);
 				whichplayer=1;
 				deadcount=populator.fleetStatus(p1f);
